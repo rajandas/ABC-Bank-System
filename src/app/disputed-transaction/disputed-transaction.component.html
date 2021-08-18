@@ -1,0 +1,94 @@
+
+<body>
+    <app-header></app-header>
+    <a routerLink="/request-list"> <input type="button" class="back-button" value="Back" /> </a>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" /> 
+
+    <div class="list-header">
+        <h3>Disputed Transaction </h3>
+    </div>
+
+     <!-- {{data | json}} -->
+
+    <form #dptsForm="ngForm" (ngSubmit)="onEdit()">
+
+    <div class="options">                                        
+        
+        <table align="center">
+            
+            <tr>
+                <td><label class="op1">Customer Name</label></td>
+                <td> <input type="text" class="val" readonly  value="{{customerName}}"></td>  
+            </tr>
+
+            <tr>
+                <td><label class="op1">Merchant Name</label></td>
+                <td> <input type="text" class="val" readonly name="merchantName" [(ngModel)]="data.merchantName"></td>  
+            </tr>
+
+            <tr>
+                <td><label class="op1">Credit/Debit Card Number</label></td>
+                <td> <input type="text" class="val" readonly name="cardNo" [(ngModel)]="data.cardNo"></td>  
+            </tr>
+           
+            <tr>
+                <td><label class="op1">Date of Transaction</label></td>
+                <td> <input type="text" class="val" readonly name="dateOfTransection" [ngModel]="data.dateOfTransection | date: 'dd/MM/yyyy'" (ngModelChange)=" data.dateOfTransection= $event"></td>  
+            </tr>
+
+            <tr>
+                <td><label class="op1">Amount Disputed</label></td>
+                <td class="amount"> Rs.<input type="text" class="amount2" readonly name="disputedAmount" [(ngModel)]="data.disputedAmount"></td>  
+            </tr>
+            
+            <tr>
+                <td><label class="op1">Reasons for Dispute</label></td>
+                <td> <input type="text" class="val" readonly name="reasonForDispute" [(ngModel)]="data.reasonForDispute"></td>  
+            </tr>
+           
+            <tr>
+                <td> <label class="op1">Status</label></td>
+                <td> 
+                    <select (click)="method1()" class="status-select"  #stat="ngModel" required 
+                    [class.is-invalid]="stat.invalid && stat.touched" name="status" [(ngModel)]="data.status" >
+                        <option  value="" selected>Select Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                    <br>
+                    <label class="error1" [class.d-none]="stat.valid || stat.untouched">Please Select the Status</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label class="op1">Response</label></td>
+                <td> 
+                    <textarea cols="50" rows="3"  [disabled]="isStatus" #rejection="ngModel" required
+                    [class.is-invalid]="rejection.invalid && rejection.touched" name="description" [(ngModel)]="data.description"  ></textarea>  
+                    
+                    <br>
+                    <div *ngIf="isStatus==false">
+          
+                      <small class="error1" [class.d-none]="rejection.valid || rejection.untouched">Reason of Rejection must be entered</small>
+                    </div>
+
+                </td>
+            </tr>
+           
+            <tr>
+                <td></td>
+                <td> <input [disabled]="dptsForm.invalid" type="submit" value="Submit" class="sub">  </td>
+            </tr>
+        </table>
+
+    </div>
+
+        
+</form>
+    
+
+    <app-footer></app-footer> 
+</body>
+
+

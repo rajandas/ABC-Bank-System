@@ -1,0 +1,65 @@
+
+<body>
+    <app-header></app-header>
+    <a routerLink="/query-list"> <input type="button" class="back-button" value="Back" /> </a>
+   <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+
+    <div class="list-header">
+        <h3>Query Response</h3>
+    </div>
+
+    <form #queryForm="ngForm" (ngSubmit)="onEdit()">
+        <!-- {{data | json}} -->
+        <div class="options">                                        
+            
+            <table align="center">
+            
+                <tr>
+                    <td><label class="op1">Customer Name</label></td>
+                    <td> <input type="text" class="val" readonly name="customerName" value="{{customerName}}"> </td>  
+                </tr>
+                
+                <tr>
+                    <td><label class="op1">Query Received On</label></td>
+                    <td> <input type="text" class="val" readonly name="requestDate" [ngModel]="data.requestDate | date: 'dd/MM/yyyy'" (ngModelChange)=" data.requestDate= $event"> </td>  
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Query</label></td>
+                    <td> <input type="text" class="val" readonly name="queryRequest" [(ngModel)]="data.queryRequest"> </td>  
+                </tr>
+            
+                <tr>
+                    <td> <label class="op1">Status</label></td>
+                    <td> 
+                        <select class="select" (click)="method1()" #stat="ngModel" required
+                        [class.is-invalid]="stat.invalid && stat.touched"  name="status" [(ngModel)]="data.status" >
+                            <option  value="" selected>Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Responded">Responded</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Response</label></td>
+                    <td> 
+                        <textarea cols="50" rows="3"   [disabled]="isStatus"  name="queryResponse" [(ngModel)]="data.queryResponse"  ></textarea>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td></td>
+                    <td><input [disabled]="queryForm.invalid" type="submit" value="Submit" class="sub"></td>
+                    
+
+                </tr>
+            </table>
+
+        </div>
+    </form>
+
+    <app-footer></app-footer>
+</body>
+
+

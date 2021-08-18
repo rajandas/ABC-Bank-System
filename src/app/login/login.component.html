@@ -1,0 +1,33 @@
+
+<body>
+  <app-header></app-header> 
+  <br><br><br>
+
+  <form #loginForm="ngForm" (ngSubmit)= "login()">
+    <div class="login">
+      <div class="login-header">
+        <h1>Employee Login</h1>
+      </div>
+      <div class="login-form">
+        <h3>Username:</h3>
+        <input type="text" placeholder="Username" #username="ngModel" required
+        [class.is-invalid]="username.invalid && username.touched" name="username" [(ngModel)]="employee.username"  /><br>
+
+        <!-- <small style="color:red;" [class.d-none]="username.valid || username.untouched">Please Enter The Username</small> -->
+
+        <h3>Password:</h3>
+        <input type="password" placeholder="Password" name="password" #password="ngModel" required
+        [class.is-invalid]="password.invalid && password.touched" [(ngModel)]="employee.password" />
+
+        <!-- <small style="color:red;" [class.d-none]="password.valid || password.untouched">Please Enter The Password</small> -->
+
+        <br><br>
+        <input type="submit" value="Submit"  [disabled]="loginForm.invalid" />
+      </div>
+    </div>
+  
+  </form>
+  <app-footer></app-footer>
+</body>
+  
+  

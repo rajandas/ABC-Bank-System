@@ -1,0 +1,52 @@
+<body>
+  <app-header></app-header>
+    <a routerLink="/menu"><input type="button" class="back-button" value="Back" /></a>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+
+    <div class="list-header">
+        <h3>List of Customer Bill Payment Requests</h3>
+    </div>
+
+
+    <div class="table">
+  
+        <table align="center" border="2"  class="tab">
+            
+            <tr>
+                <th>Serial No</th>
+                <th>Biller Id</th>
+                <th>Customer Name</th>
+                <th>Customer Request</th>
+                <th>Account Number</th>
+                <th>Account Balance</th>
+                <th>Bill Amount</th>
+                <th>PAY</th>
+                <th>FORCE PAY</th>
+                <th>REJECT</th>
+                <th>Payment Status</th>
+            </tr>
+
+            <tbody *ngFor="let bill of billPaymentData;index as i">
+              <tr>
+                <th>{{i+1}}</th>
+                <td>{{bill.billerId}}</td>
+                <td>{{bill.customerName}}</td>
+                <td>{{bill.customerRequest}}</td>
+                <td>{{bill.accountNumber}}</td>
+                <td>{{bill.accountBalance | currency:'INR'}}</td>
+                <td>{{bill.billAmount | currency:'INR'}}</td>  
+                <td><button  (click)="billPay(bill.accountNumber,bill.billAmount,bill.billerId, 'Paid')" [disabled]="bill.billAmount > bill.accountBalance || bill.BillStatus=='Paid' ">Pay</button></td> 
+                <td><button  (click)="billPay(bill.accountNumber,bill.billAmount,bill.billerId, 'Force Paid')" [disabled]="bill.billAmount <= bill.accountBalance || bill.BillStatus=='Force Paid' || bill.BillStatus=='Rejected' ">Force Pay</button></td> 
+                <td><button  (click)="billPay(bill.accountNumber,bill.billAmount,bill.billerId, 'Rejected')" [disabled]="bill.billAmount <= bill.accountBalance || bill.BillStatus=='Rejected' || bill.BillStatus=='Force Paid' ">Reject</button></td>
+                <td>{{bill.BillStatus}}</td>
+              </tr> 
+            </tbody>
+            
+        </table>
+
+    </div>
+
+  <app-footer></app-footer>
+</body>
+
+

@@ -1,0 +1,83 @@
+
+<body>
+    <app-header></app-header>
+    <a routerLink="/request-list"> <input type="button" class="back-button" value="Back" /> </a>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+
+    <div class="list-header">
+        <h3>Add On Card</h3>
+    </div>
+
+
+    <form #addCardForm="ngForm" (ngSubmit)="onEdit()">
+
+        <div class="options">                                        
+            
+            <table align="center">
+
+                <tr>
+                    <td><label class="op1">Account Number</label></td>
+                    <td> <input type="text" class="val" readonly name="accountNumber" [(ngModel)]="data.account.accountNumber"></td>  
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Customer Name</label></td>
+                    <td> <input type="text" class="val" readonly value="{{customerName}}"></td>  
+                </tr>
+
+                <tr>   
+                    <td><label class="op1">Request Date</label></td>
+                    <td> <input type="text" class="val" readonly name="requestDate" [ngModel]="data.requestDate | date: 'dd/MM/yyyy'" (ngModelChange)=" data.requestDate= $event"></td>  
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Name on Card</label></td>
+                    <td> <input type="text" class="val" readonly id="nameOnCard" value="{{customerName}}"></td>  
+                </tr>
+
+                <tr>
+                    <td> <label class="op1">Status</label></td>
+                    <td> 
+                        <select  (click)="method1()" class="status-select"  #stat="ngModel" required 
+                        [class.is-invalid]="stat.invalid && stat.touched" name="status" [(ngModel)]="data.status" >
+                            <option  value="" selected>Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                        <br>
+                        <label class="error1" [class.d-none]="stat.valid || stat.untouched">Please Select the Status</label>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Reason for Rejection</label></td>
+                    <td> 
+                        <textarea cols="50" rows="3" [disabled]="isStatus" #rejection="ngModel" required  
+                        [class.is-invalid]="rejection.invalid && rejection.touched"  name="description" [(ngModel)]="data.description"  ></textarea>
+
+                        <br>
+                        <div *ngIf="isStatus==false">
+                            <small class="error1" [class.d-none]="rejection.valid || rejection.untouched">Reason of Rejection must be entered</small>
+                        </div>
+
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td></td>
+                    <td> <input [disabled]="addCardForm.invalid" type="submit" value="Submit" class="sub"> </td>
+                </tr>
+            </table>
+
+        </div>
+
+        
+    </form>
+    
+
+    <app-footer></app-footer>  
+</body>
+
+

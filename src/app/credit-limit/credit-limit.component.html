@@ -1,0 +1,108 @@
+
+<body>
+    <app-header></app-header>
+    <a routerLink="/request-list"> <input type="button" class="back-button" value="Back" /> </a>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+
+    <div class="list-header">
+        <h3>Increase Credit Limit</h3>
+    </div>
+
+    <!-- {{data | json}}
+    {{creditLimit | json}} -->
+    
+
+    <form #IncreaseForm="ngForm" (ngSubmit)="onEdit()">
+        <div class="options">                                        
+            
+            <table align="center">
+            
+                <tr>
+                    <td><label class="op1">Name</label></td>
+                    <td> <input type="text" class="val" readonly value="{{customerName}}"> </td>  
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Card Type</label></td>
+                    <td> <input type="text" class="val" readonly name="cardType" [(ngModel)]="data.cardType"> </td>  
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Card Number</label></td>
+                    <td> <input type="text" class="val" readonly name="cardNumber" [(ngModel)]="data.cardNumber"> </td>  
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Current Credit Limit</label></td>
+                    <td class="amount"> Rs.<input type="text" class="amount2" readonly name="currentCreditLimit" [(ngModel)]="data.currentCreditLimit"></td>   
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Maximum Credit Limit</label></td>
+                    <td class="amount"> Rs.<input type="text" class="amount2" readonly name="maxCreditLimit" [(ngModel)]="data.maxCreditLimit"></td> 
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Requested Credit Limit</label></td>
+                    <td class="amount"> Rs.<input type="text" class="amount2" readonly name="requestedCreditLimit" [(ngModel)]="data.requestedCreditLimit"></td>   
+                </tr>
+
+                <tr>
+                    <td> <label class="op1">Status</label></td>
+                    <td>    
+                       
+                        <select (click)="method1()" (click)="method2()"  class="status-select" required 
+                        name="status" [(ngModel)]="data.status" >
+                            <option value="" selected>Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                        <br>
+                        <!-- <label class="error1" [class.d-none]="stat.valid || stat.untouched">Please Select the Status</label> -->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td> <label class="op1">Approved Credit Limit</label></td>
+                    <td> 
+                        <input type="text"  [disabled]="approveStatus" class="limit"  #approve="ngModel" required
+                        [class.is-invalid]="approve.invalid && approve.touched" name="approvedAmount" [(ngModel)]="creditLimit.approvedAmount" >
+                        <br>
+                        <!-- <div *ngIf="creditStatus==false">
+                            <small class="error1" [class.d-none]="approve.valid">Please Enter Approved Credit Amount</small>
+                        </div>  -->
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label class="op1">Response</label></td>
+                    <td> 
+                        <textarea cols="50" rows="3" [disabled]="textAreaStatus" 
+                         name="description" [(ngModel)]="data.description" ></textarea>
+                        <br>
+                        <!-- <div *ngIf="data.status=='Rejected'">
+                            <small class="error1" [class.d-none]="rejection.valid || rejection.untouched">Reason of Rejection must be entered</small>
+                        </div>         -->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td> <input [disabled]="IncreaseForm.invalid" type="submit" value="Submit" class="sub"> </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </form>
+
+    <app-footer></app-footer>
+</body>
+
+
+<!-- required -->
+<!-- #rejection="ngModel" -->
+
+<!-- [class.is-invalid]="rejection.invalid && rejection.touched && data.status=='Rejected'" -->

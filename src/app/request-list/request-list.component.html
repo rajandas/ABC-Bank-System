@@ -1,0 +1,143 @@
+
+<body>
+    <app-header></app-header>
+    <a routerLink="/menu"><input type="button" class="back-button" value="Back" /></a>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+
+    <form #requestForm="ngForm">
+        <div class="list-header">
+            <h3>List of Customer Requests</h3>
+        </div>
+
+        <div class="options">                                        
+            
+            <table align="center">
+                <tr>
+                    <td><label class="op1">Request Type</label></td>
+                    <td> 
+                        
+                        <select  class="select" #req="ngModel" required name="requests" 
+                        [class.is-invalid]="req.invalid && req.touched" [(ngModel)]="request.requests" >
+
+                            <option value="" selected>All requests</option>       
+                            <option value="Chequebook">Chequebook Request</option>
+                            <option value="Disputed_Transection">Disputed Transection</option>
+                            <option value="Add-On_Card">Add-on card request</option>
+                            <option value="Lost_Stolen_Card">Lost/Stolen card</option>
+                            <option value="Increase_Credit_Limit">Increase credit limit</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <label class="op1">Status</label></td>
+                    <td> 
+                        <select class="select" name="status" #stat="ngModel" required
+                        [class.is-invalid]="stat.invalid && stat.touched" [(ngModel)]="request.status"  >
+                            <option  value="" selected>All status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>    
+
+
+    <div class="table">
+  
+        <table align="center" border="2"  class="tab">
+            <thead>
+                <tr>
+                    <th>SL No</th>
+                    <th>Request Type</th>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                    <th>Customer Name</th>
+                    <th>Request Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody *ngFor="let req of requestList">
+
+                <tr *ngIf="req.status==request.status && req.requestType==request.requests"> 
+                    <td>{{incriment()}}</td>
+                    <td>{{req.requestType}}</td>
+                    <td>{{req.accoutnNumber}}</td>
+                    <td>{{req.accountType}} Account</td>
+                    <td>{{req.customerName}}</td>
+                    <td>{{req.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{req.status}}</td>
+                    <td *ngIf="req.requestType=='Chequebook'"><button (click)="onChequebook(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Disputed_Transection'"><button (click)="onDisputedTrans(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Add-On_Card'"><button (click)="onAddOnCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Lost_Stolen_Card'"><button (click)="onLostStolenCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Increase_Credit_Limit'"><button (click)="onCreditLimit(req.requestId)" class="clickhere">Click Here</button></td>
+
+
+                </tr>
+   
+               <tr *ngIf="request.requests=='' && req.status==request.status"> 
+                    <td>{{incriment()}}</td>
+                    <td>{{req.requestType}}</td>
+                    <td>{{req.accoutnNumber}}</td>
+                    <td>{{req.accountType}} Account</td>
+                    <td>{{req.customerName}}</td>
+                    <td>{{req.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{req.status}}</td>
+                    <td *ngIf="req.requestType=='Chequebook'"><button (click)="onChequebook(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Disputed_Transection'"><button (click)="onDisputedTrans(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Add-On_Card'"><button (click)="onAddOnCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Lost_Stolen_Card'"><button (click)="onLostStolenCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Increase_Credit_Limit'"><button (click)="onCreditLimit(req.requestId)" class="clickhere">Click Here</button></td>
+
+                </tr>
+
+                <tr *ngIf="request.requests=='' && request.status==''">  
+                    <td>{{incriment()}}</td>
+                    <td>{{req.requestType}}</td>
+                    <td>{{req.accoutnNumber}}</td>
+                    <td>{{req.accountType}} Account</td>
+                    <td>{{req.customerName}}</td>
+                    <td>{{req.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{req.status}}</td>
+                    <td *ngIf="req.requestType=='Chequebook'"><button (click)="onChequebook(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Disputed_Transection'"><button (click)="onDisputedTrans(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Add-On_Card'"><button (click)="onAddOnCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Lost_Stolen_Card'"><button (click)="onLostStolenCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Increase_Credit_Limit'"><button (click)="onCreditLimit(req.requestId)" class="clickhere">Click Here</button></td>
+
+                </tr>
+
+
+                <tr *ngIf="request.requests==req.requestType &&  request.status==''"> 
+                    <td>{{incriment()}}</td>
+                    <td>{{req.requestType}}</td>
+                    <td>{{req.accoutnNumber}}</td>
+                    <td>{{req.accountType}} Account</td>
+                    <td>{{req.customerName}}</td>
+                    <td>{{req.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{req.status}}</td>
+                    <td *ngIf="req.requestType=='Chequebook'"><button (click)="onChequebook(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Disputed_Transection'"><button (click)="onDisputedTrans(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Add-On_Card'"><button (click)="onAddOnCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Lost_Stolen_Card'"><button (click)="onLostStolenCard(req.requestId)" class="clickhere">Click Here</button></td>
+                    <td *ngIf="req.requestType=='Increase_Credit_Limit'"><button (click)="onCreditLimit(req.requestId)" class="clickhere">Click Here</button></td>
+
+                </tr>
+
+            </tbody>
+            
+        </table>
+
+    </div>
+  
+    {{resetvalue()}}
+
+    <app-footer></app-footer> 
+</body>
+

@@ -1,0 +1,19 @@
+
+.footer {  
+    position: fixed;  
+    left: 8px;  
+    bottom: 1px;  
+    right: 8px;   
+    height: 34px;
+  
+    background-color:gray;  
+    color: white;  
+    text-align: center;
+    font-size: medium;
+  
+    }  
+    
+  .footer p{
+    margin-top: 7px;
+  }
+   

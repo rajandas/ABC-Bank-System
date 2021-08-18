@@ -1,0 +1,80 @@
+
+<body>
+    <app-header></app-header>
+    <a routerLink="/menu"> <input type="button" class="back-button" value="Back" /> </a>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+
+    
+    <form #queryForm="ngForm">
+        <div class="list-header">
+            <h3>List of Customer Queries</h3>
+        </div>
+
+        <div class="options">                                        
+            
+            <table align="center">
+                <tr>
+                    <td> <label class="op1">Status</label></td>
+                    <td> 
+                        <select class="select" #stat="ngModel" required
+                        [class.is-invalid]="stat.invalid && stat.touched" name="status" [(ngModel)]="query.status"    >
+                            <option  value="" selected>All status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Responded">Responded</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+      
+    <div class="table">
+  
+        <table align="center" border="2"  class="tab">
+            <thead>
+                <tr>
+                    <th>Query Number</th>
+                    <th>Customer Name</th>
+                    <th>Request Date</th>
+                    <th>Customer Query</th>
+                    <th>Query Response</th>
+                    <th>Response Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                
+                </tr>
+            </thead>
+
+            <tbody *ngFor="let que of queryList;index as i">
+
+                <tr *ngIf="que.status==query.status"> 
+                    <td>{{incriment()}}</td>
+                    <td>{{que.customerName}}</td>
+                    <td>{{que.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{que.customerQuery}}</td>
+                    <td>{{que.queryResponse}}</td>
+                    <td> {{que.responseDate | date: 'dd-MM-yyyy'}} </td>  
+                    <td>{{que.status}}</td>
+                    <td > <button (click)="onQuery(que.queryId)" class="clickhere">Click Here</button> </td>
+                </tr>
+
+                <tr *ngIf="query.status==''"> 
+                    <td>{{incriment()}}</td>
+                    <td>{{que.customerName}}</td>
+                    <td>{{que.requestDate | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{que.customerQuery}}</td>
+                    <td>{{que.queryResponse}}</td>
+                    <td> {{que.responseDate | date: 'dd-MM-yyyy'}} </td>
+                    <td>{{que.status}}</td>
+                    <td > <button (click)="onQuery(que.queryId)" class="clickhere">Click Here</button> </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+  
+    {{resetvalue()}}
+    <app-footer></app-footer>   
+</body>
+

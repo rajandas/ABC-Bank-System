@@ -1,0 +1,62 @@
+
+body {
+    background:url('http://cdn.wallpapersafari.com/13/6/Mpsg2b.jpg');
+    margin:0px;
+    font-family: 'Ubuntu', sans-serif;
+    background-size: 100% 110%;
+    height: 95vh;
+}
+
+
+.back-button{ 
+    height:30px;
+    width:100px;
+    background:#fff;
+    border:1px solid #f2f2f2;
+    border-radius:20px;
+    color: rgb(13, 25, 37);
+    text-transform:uppercase;
+    font-family: 'Ubuntu', sans-serif;
+    cursor:pointer;
+}
+
+.logout-button{ 
+    float: right;
+    height:30px;
+    width:100px;
+    background:#fff;
+    border:1px solid #f2f2f2;
+    border-radius:20px;
+    color: rgb(13, 25, 37);
+    text-transform:uppercase;
+    font-family: 'Ubuntu', sans-serif;
+    cursor:pointer;
+}
+  
+.list-header {
+    clear: right;
+    color:#fff;
+    text-align:center;
+    font-size:140%;
+}
+
+
+
+.table{
+    margin-top: 25px; 
+   
+}
+
+.tab{
+    background-color: white;
+    text-align: center;
+    width: 80%;
+    border-collapse: collapse;
+
+}
+
+.tab tr{
+        height: 35px; 
+}
+
+

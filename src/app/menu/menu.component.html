@@ -1,0 +1,19 @@
+
+<body>
+    <app-header></app-header>
+    <input (click)="SignOut()" type="button" class="logout-button" value="Logout" />
+    <br><br>
+
+    <div class="menu-header">
+        <h2>Bank Office Menu</h2>
+    </div>
+
+     <div class="options">
+        <a routerLink="/request-list"> <button type="button"> <h3>Customer Request</h3></button> </a> <br><br>
+        <a routerLink="/query-list"><button type="button"> <h3>Customer Queries</h3></button> </a> <br><br>
+        <a routerLink="/bill-payment"><button type="button"> <h3>Bill Payment</h3></button> </a> <br>
+     </div>
+  
+   
+    <app-footer></app-footer> 
+</body>
